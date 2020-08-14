@@ -13,10 +13,37 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
+class Tree:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def insert(self, data):
+        if data == self.data:
+            duplicates.append(data)
+            return False
+        elif data < self.data:
+            if not self.left:
+                self.left = Tree(data)
+            else:
+                self.left.insert(data)
+        elif data > self.data:
+            if not self.right:
+                self.right = Tree(data)
+            else:
+                self.right.insert(data)
+
+first_name = names_1.pop(0)
+tree = Tree(first_name)
+for name in names_1:
+    tree.insert(name)
+for name in names_2:
+    tree.insert(name)
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
